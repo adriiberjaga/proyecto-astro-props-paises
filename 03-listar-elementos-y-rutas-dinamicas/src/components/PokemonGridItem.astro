@@ -1,0 +1,25 @@
+---
+interface Pokemon {
+  name: string;
+  url: string;
+}
+
+interface Props {
+  pokemon: Pokemon;
+}
+
+const { pokemon } = Astro.props;
+
+const pokemonId = pokemon.url.split('/').at(-2);
+---
+
+<a href={`/pokemons/${pokemon.name}`}>
+  <article class="p-6 bg-white rounded relative shadow-lg border">
+    <h2 class="text-center text-xl font-bold text-indigo-500">
+      {pokemon.name}
+    </h2>
+    <span class="absolute top-1 left-2 text-indigo-500 font-bold text-lg">
+      {pokemonId}
+    </span>
+  </article>
+</a>

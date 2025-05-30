@@ -1,0 +1,62 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import avatarImage from '../assets/img/avatar.jpg';
+
+import { Image } from 'astro:assets';
+
+console.log(avatarImage);
+---
+
+<MainLayout>
+  <main class="home-main">
+    <div class="profile-container">
+      <div class="profile">
+        <div class="profile-info">
+          <Image
+            class="avatar"
+            src={avatarImage}
+            alt="Foto de perfil de Ivan Luengo"
+          />
+
+          <h2 class="avatar-name"><span>Ivan</span><span>Luengo</span></h2>
+          <div class="separator"></div>
+          <h3>PROFESOR DE PROGRAMACIÓN</h3>
+        </div>
+
+        <nav class="social-icons">
+          <a href="https://facebook.com">
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a href="https://x.com">
+            <i class="bi bi-twitter"></i>
+          </a>
+          <a href="https://linkedin.com">
+            <i class="bi bi-linkedin"></i>
+          </a>
+          <a href="https://instagram.com">
+            <i class="bi bi-instagram"></i>
+          </a>
+        </nav>
+      </div>
+
+      <div class="profile-text">
+        <span class="hi text-red-500">Hola</span>
+        <p>Esto es lo que soy y lo que hago</p>
+        <div class="buttons">
+          <a class="button button-primary" href="./curriculum.html"
+            >CURRÍCULUM</a
+          >
+          <a class="button button-secondary" href="./proyectos.html"
+            >PROYECTOS</a
+          >
+        </div>
+        <p>
+          Párrafo, Haz clic aquí para agregar tu propio texto y editar. Es
+          fácil. Haz clic en " Editar " o doble clic aquí para agregar tu
+          contenido y la fuente. Aquí puedes contar tu historia y permitir que
+          tus usuarios sepan más sobre ti.
+        </p>
+      </div>
+    </div>
+  </main>
+</MainLayout>

@@ -1,0 +1,31 @@
+---
+import CountryInfo from "../../components/CountryInfo.astro";
+import MainLayout from "../../layouts/MainLayout.astro";
+import type { countryInterface } from "../../types/countryInterface";
+import getCountries from "../../services/getCountries";
+
+// TODO: Creáis todas las páginas estáticas para cada bandera getStaticPaths()
+
+export async function getStaticPaths() {
+  const countries = await getCountries();
+
+  const country = countries.map((item: countryInterface) => {
+    return {
+      params: { countryName: item.name.common },
+      props: { country: item },
+    };
+  });
+  return country;
+}
+
+interface Props {
+  country: countryInterface;
+}
+const { country } = Astro.props;
+---
+
+<MainLayout title={`País - ${country.name.common}`}>
+  <main class="container mx-auto my-8 flex flex-col items-center">
+    <CountryInfo country={country} />
+  </main>
+</MainLayout>

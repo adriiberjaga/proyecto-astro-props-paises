@@ -1,0 +1,33 @@
+---
+import PokemonInfoCard from '../../components/PokemonInfoCard.astro';
+import MainLayout from '../../layouts/MainLayout.astro';
+import capitalize from '../../utils/capitalize';
+
+export async function getStaticPaths() {
+  const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
+  const data = await response.json();
+
+  const staticPathsArray = data.results.map((pokemon) => {
+    return {
+      params: { nombrePokemon: pokemon.name },
+      props: { name: pokemon.name, url: pokemon.url },
+    };
+  });
+
+  return staticPathsArray;
+}
+
+//****************************************************/
+//* A partir de aqué es como si fuera un componente normal
+
+const { name, url } = Astro.props;
+
+const response = await fetch(url);
+const pokemonJSON = await response.json();
+---
+
+<MainLayout>
+  <main class="container mx-auto my-8">
+    <PokemonInfoCard pokemon={pokemonJSON} />
+  </main>
+</MainLayout>

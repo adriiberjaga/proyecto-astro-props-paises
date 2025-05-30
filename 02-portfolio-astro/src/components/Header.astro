@@ -1,0 +1,36 @@
+---
+import MainMenu from './MainMenu.astro';
+---
+
+<header class="main-header">
+  <div class="box"></div>
+  <h1 class="logo">Ivan Luengo <span>/ Profesor de programación</span></h1>
+
+  <MainMenu />
+</header>
+
+<style>
+  .main-header {
+    /* border: 2px solid red; */
+
+    background-color: white;
+    padding: 30px;
+
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .logo {
+    /* outline: 2px solid blue; */
+
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+  }
+
+  .logo > span {
+    font-weight: 100;
+    font-size: 1.5rem;
+  }
+</style>

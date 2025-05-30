@@ -1,0 +1,14 @@
+---
+import CountryItem from "./CountryItem.astro";
+import type { countryInterface } from "../types/countryInterface";
+
+interface Props {
+  Acountrys: countryInterface[];
+}
+
+const { Acountrys } = Astro.props;
+---
+
+<section class="grid grid-cols-2 md:grid-cols-5 gap-4 my-8">
+  {Acountrys.map((country) => <CountryItem country={country} />)}
+</section>
