@@ -1,5 +1,6 @@
 ---
 import CountryList from "../components/CountryList.astro";
+import SearchComponent from "../components/SearchComponent.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 
 // TODO: Al cargar que llame a la funcion getCountries y obtenga todos los países //hecho
@@ -10,8 +11,8 @@ const countrys = await getCountries();
 
 <MainLayout title="Home">
   <main class="container mx-auto my-8">
-    <h1 class="text-5xl font-bold">Lista de países</h1>
-
+    <h1 class="text-5xl font-bold flex justify-center">Lista de países</h1>
+    <SearchComponent />
     <CountryList Acountrys={countrys} />
   </main>
 </MainLayout>

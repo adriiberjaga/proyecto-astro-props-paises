@@ -1,7 +1,8 @@
 import type { countryInterface } from '../types/countryInterface';
 
 export async function getCountries(): Promise<countryInterface[]> {
-  const URL = 'https://restcountries.com/v3.1/all'
+  const URL = 'https://restcountries.com/v3.1/name/deutschland'
+  // const URL = 'https://restcountries.com/v3.1/all'
 
   try {
     const resp = await fetch(URL);
