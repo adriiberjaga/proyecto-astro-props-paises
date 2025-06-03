@@ -7,8 +7,11 @@ interface Props {
 }
 
 const { Acountrys } = Astro.props;
+const sortedCountries = [...Acountrys].sort((a, b) =>
+  a.name.common.localeCompare(b.name.common)
+);
 ---
 
 <section class="grid grid-cols-2 md:grid-cols-5 gap-4 my-8">
-  {Acountrys.map((country) => <CountryItem country={country} />)}
+  {sortedCountries.map((country) => <CountryItem country={country} />)}
 </section>
