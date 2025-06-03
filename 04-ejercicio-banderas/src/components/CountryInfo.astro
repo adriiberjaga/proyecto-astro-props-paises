@@ -5,7 +5,21 @@ import type { countryInterface } from "../types/countryInterface";
 interface Props {
   country: countryInterface;
 }
+
 const { country } = Astro.props;
+
+// Obtener el primer código de moneda si existen monedas
+const currencyCode = country.currencies
+  ? (Object.keys(country.currencies)[0] as keyof typeof country.currencies)
+  : undefined;
+
+// Usar aserción para que TypeScript sepa que sí existe
+const currency =
+  currencyCode && country.currencies
+    ? country.currencies[currencyCode]
+    : undefined;
+const symbol = currency?.symbol ?? "";
+const currencyName = currency?.name ?? "";
 ---
 
 <h1 class="text-5xl font-bold">{country.name.common}</h1>
@@ -18,5 +32,6 @@ const { country } = Astro.props;
 
 <div class="flex gap-4">
   <span><i class="bi bi-people text-green-500"></i> {country.population}</span>
-  <!-- <span><i class="bi bi-coin text-yellow-400"></i> {country.currencies} (₮)</span> -->
+  <span <i class="bi bi-coin text-yellow-400"></span>
+  {symbol} ({currencyCode})
 </div>
