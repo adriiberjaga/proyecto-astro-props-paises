@@ -19,6 +19,6 @@ const { country } = Astro.props; // ESTE ES EL PAÍS RECIBIDO POR LAS PROPS
       src={country.flags.svg}
       alt={`Bandera de ${country.name}`}
     />
-    <h2 class="text-xl font-bold mt-4">{country.name.common}</h2>
+    <h2 class="text-xl font-bold mt-4">{country.translations.spa.common}</h2>
   </article>
 </a>

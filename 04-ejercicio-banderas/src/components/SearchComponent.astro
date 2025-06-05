@@ -1,3 +1,53 @@
 ---
-//PDT HACER EL BUSCADOR CON NREACT, YA INSTALADO, Y IMPLEMENTAR
+import type { countryInterface } from "../types/countryInterface";
+
+interface Props {
+  countries: countryInterface[];
+}
+
+const { countries } = Astro.props;
 ---
+
+<form onsubmit="event.preventDefault()">
+  <input
+    id="country-search"
+    class="input"
+    type="text"
+    placeholder="Buscar país..."
+  />
+</form>
+
+<script>
+  if (typeof window !== "undefined") {
+    const input = document.getElementById("country-search");
+
+    // Normaliza texto (quita tildes, pasa a minúsculas)
+    const normalize = (str: string) =>
+      str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+
+    input?.addEventListener("input", (e) => {
+      const target = e.target as HTMLInputElement | null;
+      if (!target) return;
+      const value = normalize(target.value);
+      const searchEvent = new CustomEvent("search-change", {
+        detail: value,
+      });
+      window.dispatchEvent(searchEvent);
+    });
+  }
+</script>
+
+<style>
+  .input {
+    border: 1px solid black;
+    border-radius: 8px;
+    background: #000;
+    color: white;
+    padding: 0.5rem;
+    width: 100%;
+    max-width: 400px;
+  }
+</style>

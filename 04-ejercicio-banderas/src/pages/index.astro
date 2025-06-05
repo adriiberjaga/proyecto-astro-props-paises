@@ -12,7 +12,7 @@ const countrys = await getCountries();
 <MainLayout title="Home">
   <main class="container mx-auto my-8">
     <h1 class="text-5xl font-bold flex justify-center">Lista de países</h1>
-    <SearchComponent />
+    <SearchComponent countries={countrys} />
     <CountryList Acountrys={countrys} />
   </main>
 </MainLayout>

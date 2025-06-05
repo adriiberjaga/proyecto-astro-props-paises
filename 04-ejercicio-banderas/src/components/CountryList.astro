@@ -8,10 +8,50 @@ interface Props {
 
 const { Acountrys } = Astro.props;
 const sortedCountries = [...Acountrys].sort((a, b) =>
-  a.name.common.localeCompare(b.name.common)
+  a.translations.spa.common.localeCompare(b.translations.spa.common)
 );
 ---
 
-<section class="grid grid-cols-2 md:grid-cols-5 gap-4 my-8">
-  {sortedCountries.map((country) => <CountryItem country={country} />)}
+<section id="country-list" class="grid grid-cols-2 md:grid-cols-5 gap-4 my-8">
+  {
+    sortedCountries.map((country) => (
+      <div
+        class="country-item"
+        data-name={country.translations.spa.common
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()}
+      >
+        <CountryItem country={country} />
+      </div>
+    ))
+  }
 </section>
+
+<script is="client">
+  const container = document.getElementById("country-list");
+  const items = Array.from(document.querySelectorAll(".country-item"));
+
+  window.addEventListener("search-change", (e) => {
+    const query = e.detail;
+
+    const filtered = items
+      .map((el) => {
+        const name = el.getAttribute("data-name");
+        const index = name.indexOf(query);
+        return {
+          el,
+          match: index !== -1,
+          relevance: index,
+        };
+      })
+      .filter((item) => item.match)
+      .sort((a, b) => a.relevance - b.relevance);
+
+    // Limpiar y reordenar
+    container.innerHTML = "";
+    filtered.forEach((item) => {
+      container.appendChild(item.el);
+    });
+  });
+</script>
